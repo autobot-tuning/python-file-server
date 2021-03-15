@@ -1,8 +1,8 @@
 import os
 import logging
 
-__root_path = ""
 __logger = logging.getLogger(__name__)
+__root_path = ""
 
 
 def init(root_folder_path):
@@ -25,9 +25,9 @@ def init(root_folder_path):
     global __root_path
     path = os.path.abspath(root_folder_path)
     if not os.path.isdir(path):
-        raise IOError ("Initial folder %s is incorrect." % path)
+        raise IOError("Initial folder %s is incorrect." % path)
     __root_path = path
-    __logger.debug("File server initialized")
+    __logger.info("File server initialized at %s folder." % path)
 
 
 def make_path(filename):
@@ -37,5 +37,16 @@ def make_path(filename):
     return os.path.normpath(os.path.join(__root_path, filename))
 
 
-def create_file(filename, content):
+def write_file(filename, content):
     path = make_path(filename)
+    with open(path, "wt") as fh:
+        fh.write(content)
+    __logger.info("Created file %s." % path)
+
+
+def read_file(filename):
+    path = make_path(filename)
+    with open(path, "rt") as fh:
+        content = fh.read()
+    __logger.info("Read file %s." % path)
+    return content
