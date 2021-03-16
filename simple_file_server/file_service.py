@@ -1,3 +1,4 @@
+import hashlib
 import os
 import logging
 
@@ -50,3 +51,12 @@ def read_file(filename):
         content = fh.read()
     __logger.info("Read file %s." % path)
     return content
+
+
+
+
+def make_statistics(filename):
+    path = make_path(filename)
+    f_size = os.path.getsize(path)
+    f_date = os.path.getsize(path)
+    return "Name: %s, %Size %s, Date: "
