@@ -1,4 +1,4 @@
-import hashlib
+from __future__ import unicode_literals
 import os
 import logging
 
@@ -51,8 +51,6 @@ def read_file(filename):
         content = fh.read()
     __logger.info("Read file %s." % path)
     return content
-
-
 
 
 def make_statistics(filename):
