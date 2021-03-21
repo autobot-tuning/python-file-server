@@ -10,18 +10,22 @@ def init(root_folder_path):
     """
     Initialize repository with the root folder path.
     @param root_folder_path: String, absolute or relative path
-    >>> init("."); print "root_path=", __root_path # @HOW return __root_path?
-    ... #doctest:+ELLIPSIS
+    >>> init("."); print("root_path=", __root_path) # @HOW return correct __root_path?
     root_path=...
 
     >>> init(".")
-    ... print "root_path=" # @WHY this line make no output?
+    ... print("root_path=", make_path(""))
+    ... #doctest:+ELLIPSIS
+    root_path= ...
+
+    >>> init(".")
+    ... print("root_path=") # @WHY this line make no output?
 
     >>> init("uNrEAl~!!$%-nAmE")
     ... #doctest:+ELLIPSIS
     Traceback (most recent call last):
     ...
-    IOError: ...
+    OSError: ...
     """
     global __root_path
     path = os.path.abspath(root_folder_path)
@@ -32,7 +36,6 @@ def init(root_folder_path):
 
 
 def make_path(filename):
-    global __root_path
     if __root_path == "":
         raise RuntimeError("Module not initialized. Call init().")
     return os.path.normpath(os.path.join(__root_path, filename))
